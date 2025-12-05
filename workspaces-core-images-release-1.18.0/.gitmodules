@@ -1,4 +1,0 @@
-[submodule "kasm-desktop-kde"]
-	path = kasm-desktop-kde
-	branch = develop
-	url = https://github.com/kasmtech/KasmOS-KDE-Desktop

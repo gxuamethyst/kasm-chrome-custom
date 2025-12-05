@@ -1,1 +1,0 @@
-KasmOS base image for Kasm Workspaces
