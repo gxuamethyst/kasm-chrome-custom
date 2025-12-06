@@ -59,7 +59,14 @@ rm -f \
   /etc/xdg/autostart/xfce4-power-manager.desktop \
   /etc/xdg/autostart/xfce4-screensaver.desktop \
   /etc/xdg/autostart/xfce-polkit.desktop \
-  /etc/xdg/autostart/xscreensaver.desktop
+  /etc/xdg/autostart/xscreensaver.desktop \
+  /etc/xdg/autostart/nm-applet.desktop \
+  /etc/xdg/autostart/print-applet.desktop \
+  /etc/xdg/autostart/pulseaudio.desktop \
+  /etc/xdg/autostart/at-spi-dbus-bus.desktop \
+  /etc/xdg/autostart/unity-fallback-mount-helper.desktop \
+  /etc/xdg/autostart/unity-settings-daemon.desktop \
+  /etc/xdg/autostart/xiccd.desktop
 
 # Cleanup specific to KasmOS
 if [ "$1" = "kasmos" ] ; then

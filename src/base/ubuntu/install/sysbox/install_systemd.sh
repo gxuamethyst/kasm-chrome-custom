@@ -84,8 +84,6 @@ WantedBy=multi-user.target
 EOL
 cat >/kasm-sysbox-setup.sh<<EOL
 #!/bin/bash
-mkdir -p /var/run/pulse
-chown kasm-user:kasm-user /var/run/pulse
 cat /proc/1/environ | xargs --null --max-args=1 > /envdump
 if [ -f /usr/sbin/policy-rc.d ]; then
   printf '#!/bin/sh\nexit 0' > /usr/sbin/policy-rc.d

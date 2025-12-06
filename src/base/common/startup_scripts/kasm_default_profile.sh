@@ -53,8 +53,6 @@ fi
 
 verify_profile_config
 
-rm -rf $HOME/.config/pulse
-
 # unknown option ==> call command
 echo -e "\n\n------------------ EXECUTE COMMAND ------------------"
 echo "Executing command: '$@'"

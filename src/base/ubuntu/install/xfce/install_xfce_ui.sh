@@ -184,7 +184,6 @@ elif [[ "$DISTRO" = @(fedora37|fedora38|fedora39|fedora40|fedora41) ]]; then
     Thunar \
     xfce4-appfinder \
     xfce4-datetime-plugin \
-    xfce4-panel \
     xfce4-places-plugin \
     xfce4-session \
     xfce4-settings \
@@ -206,7 +205,6 @@ elif [ "$DISTRO" = "alpine" ]; then
     dbus-x11 \
     faenza-icon-theme \
     faenza-icon-theme-xfce4-appfinder \
-    faenza-icon-theme-xfce4-panel \
     gvfs \
     mesa \
     mesa-dri-gallium \
