@@ -1,5 +1,5 @@
 #### Build Stage ####
-ARG BASE_IMAGE="ubuntu:20.04"
+ARG BASE_IMAGE="ubuntu:24.04"
 FROM $BASE_IMAGE AS base_layer
 
 ### Environment config
