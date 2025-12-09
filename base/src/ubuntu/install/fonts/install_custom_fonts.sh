@@ -6,7 +6,7 @@ LOCALES_RHEL="glibc-langpack-en glibc-langpack-zh"
 
 LOCALES_UBUNTU="language-pack-en language-pack-zh-hans"
 
-LOCALES="en_AG en_AU en_BW en_CA en_DK en_GB en_HK en_IE en_IN en_NG en_NZ en_PH en_SG en_US en_ZA en_ZM en_ZW zh_CN zh_HK zh_SG zh_TW zu_ZA"
+LOCALES="en_US zh_CN zh_HK zh_SG zh_TW zu_ZA"
 
 echo "Installing fonts and languages"
 if [[ "${DISTRO}" == "oracle7" ]]; then

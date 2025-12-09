@@ -3,11 +3,11 @@ network:
   interface: 0.0.0.0
   websocket_port: 6901
   use_ipv4: true
-  use_ipv6: false
+  use_ipv6: true
   ssl:
     pem_certificate: ${HOME}/.vnc/self.pem
     pem_key: ${HOME}/.vnc/self.pem
-    require_ssl: false
+    require_ssl: true
   udp:
     public_ip: 127.0.0.1
 runtime_configuration:

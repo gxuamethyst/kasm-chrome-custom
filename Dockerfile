@@ -193,7 +193,7 @@ COPY ./chrome/src/misc/single_app_security.sh $INST_SCRIPTS/misc/
 RUN  bash $INST_SCRIPTS/misc/single_app_security.sh -t && rm -rf $INST_SCRIPTS/misc/
 
 # Setup the custom startup script that will be invoked when the container starts
-ENV LAUNCH_URL  chrome://newtab
+ENV LAUNCH_URL  about:blank
 
 COPY ./chrome/src/install/custom_startup.sh $STARTUPDIR/custom_startup.sh
 RUN chmod +x $STARTUPDIR/custom_startup.sh
