@@ -2,8 +2,8 @@
 
 if [ "$USE_APT_MIRROR" = "true" ]; then
     echo "using apt mirror ..."
-    sed -i "s@http://.*archive.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
-    sed -i "s@http://.*security.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
-    sed -i 's/http://ppa.launchpad.net/launchpad.proxy.ustclug.org/g' /etc/apt/sources.list /etc/apt/sources.list.d/*.list
-    sed -ri 's#(.*http)(://launchpad.proxy.ustclug.org.*)#\1s\2#g' /etc/apt/sources.list /etc/apt/sources.list.d/*.list
+    cp -f $INST_SCRIPTS/apt_mirror/source.list /etc/apt/source.list
+    cp -f $INST_SCRIPTS/apt_mirror/source.list.d/kisak-ubuntu-turtle-focal.list.mirror /etc/apt/source.list.d/kisak-ubuntu-turtle-focal.list
+else
+    cp -f $INST_SCRIPTS/apt_mirror/source.list.d/kisak-ubuntu-turtle-focal.list /etc/apt/source.list.d/kisak-ubuntu-turtle-focal.list
 fi

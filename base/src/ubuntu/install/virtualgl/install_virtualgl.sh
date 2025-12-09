@@ -27,7 +27,6 @@ if [ "$DISTRO" = "ubuntu" ]; then
         libgles2 libgles2:i386
 
     if ! grep -q "24.04" /etc/os-release; then
-      add-apt-repository ppa:kisak/turtle
       apt full-upgrade -y
     fi
     dpkg -i $INST_SCRIPTS/virtualgl/virtualgl_*amd64.deb
