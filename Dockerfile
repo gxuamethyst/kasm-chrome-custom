@@ -127,7 +127,7 @@ COPY ./base/src/ubuntu/install/cleanup $INST_SCRIPTS/cleanup/
 RUN bash $INST_SCRIPTS/cleanup/cleanup.sh && rm -rf $INST_SCRIPTS/cleanup/
 
 #### Core Runtime Stage ####
-FROM scratch as kasm-core
+FROM scratch AS kasm-core
 COPY --from=base_layer / /
 
 ### Environment config
@@ -180,9 +180,9 @@ CMD ["--wait"]
 FROM kasm-core
 USER root
 
-ENV HOME /home/kasm-default-profile
-ENV STARTUPDIR /dockerstartup
-ENV INST_SCRIPTS $STARTUPDIR/install
+ENV HOME=/home/kasm-default-profile
+ENV STARTUPDIR=/dockerstartup
+ENV INST_SCRIPTS=$STARTUPDIR/install
 WORKDIR $HOME
 
 ######### Customize Container Here ###########
@@ -202,7 +202,7 @@ COPY ./chrome/src/misc/single_app_security.sh $INST_SCRIPTS/misc/
 RUN  bash $INST_SCRIPTS/misc/single_app_security.sh -t && rm -rf $INST_SCRIPTS/misc/
 
 # Setup the custom startup script that will be invoked when the container starts
-ENV LAUNCH_URL  about:blank
+ENV LAUNCH_URL=about:blank
 
 COPY ./chrome/src/install/custom_startup.sh $STARTUPDIR/custom_startup.sh
 RUN chmod +x $STARTUPDIR/custom_startup.sh
@@ -219,7 +219,7 @@ RUN bash $INST_SCRIPTS/close_browser_breakout_via_file_manager/replace_thunar_wi
 RUN chown 1000:0 $HOME
 RUN $STARTUPDIR/set_user_permission.sh $HOME
 
-ENV HOME /home/kasm-user
+ENV HOME=/home/kasm-user
 WORKDIR $HOME
 RUN mkdir -p $HOME && chown -R 1000:0 $HOME
 
