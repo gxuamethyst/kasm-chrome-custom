@@ -28,13 +28,8 @@ WORKDIR $HOME
 RUN mkdir -p $HOME/Desktop
 
 ### Setup apt mirror(if specified)
-RUN if [ "$USE_APT_MIRROR" = "true" ]; then \
-        echo "using apt mirror ..." && \
-        sed -i "s@http://.*archive.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
-        sed -i "s@http://.*security.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
-        sed -i 's/http://ppa.launchpad.net/launchpad.proxy.ustclug.org/g' /etc/apt/sources.list /etc/apt/sources.list.d/*.list && \
-        sed -ri 's#(.*http)(://launchpad.proxy.ustclug.org.*)#\1s\2#g' /etc/apt/sources.list /etc/apt/sources.list.d/*.list ; \
-    fi
+COPY ./base/src/ubuntu/install/apt_mirror $INST_SCRIPTS/apt_mirror/
+RUN bash $INST_SCRIPTS/apt_mirror/use_apt_mirror.sh && rm -rf $INST_SCRIPTS/apt_mirror/
 
 ### Setup package rules
 COPY ./base/src/ubuntu/install/package_rules $INST_SCRIPTS/package_rules/
