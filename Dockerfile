@@ -26,60 +26,60 @@ WORKDIR $HOME
 RUN mkdir -p $HOME/Desktop
 
 ### Setup package rules
-COPY ./src/base/ubuntu/install/package_rules $INST_SCRIPTS/package_rules/
+COPY ./base/src/ubuntu/install/package_rules $INST_SCRIPTS/package_rules/
 RUN bash $INST_SCRIPTS/package_rules/package_rules.sh && rm -rf $INST_SCRIPTS/package_rules/
 
 ### Install common tools
-COPY ./src/base/ubuntu/install/tools $INST_SCRIPTS/tools/
+COPY ./base/src/ubuntu/install/tools $INST_SCRIPTS/tools/
 RUN bash $INST_SCRIPTS/tools/install_tools.sh && rm -rf $INST_SCRIPTS/tools/
 
 ### Copy over the maximization script to our startup dir for use by app images.
-COPY ./src/base/ubuntu/install/maximize_script $STARTUPDIR/
+COPY ./base/src/ubuntu/install/maximize_script $STARTUPDIR/
 
 ### Install custom fonts
-COPY ./src/base/ubuntu/install/fonts $INST_SCRIPTS/fonts/
+COPY ./base/src/ubuntu/install/fonts $INST_SCRIPTS/fonts/
 RUN bash $INST_SCRIPTS/fonts/install_custom_fonts.sh && rm -rf $INST_SCRIPTS/fonts/
 
 ### Install xfce UI
-COPY ./src/base/ubuntu/install/xfce $INST_SCRIPTS/xfce/
+COPY ./base/src/ubuntu/install/xfce $INST_SCRIPTS/xfce/
 RUN bash $INST_SCRIPTS/xfce/install_xfce_ui.sh && rm -rf $INST_SCRIPTS/xfce/
-ADD ./src/base/$DISTRO/xfce/.config/ $HOME/.config/
+ADD ./base/src/$DISTRO/xfce/.config/ $HOME/.config/
 RUN mkdir -p /usr/share/extra/backgrounds/
 RUN mkdir -p /usr/share/extra/icons/
-ADD /src/base/common/resources/images/bg_kasm.png  /usr/share/backgrounds/bg_kasm.png
-ADD /src/base/common/resources/images/$BG_IMG  /usr/share/backgrounds/bg_default.png
-ADD /src/base/common/resources/images/icon_ubuntu.png /usr/share/extra/icons/icon_ubuntu.png
-ADD /src/base/common/resources/images/icon_ubuntu.png /usr/share/extra/icons/icon_default.png
-ADD /src/base/common/resources/images/icon_kasm.png /usr/share/extra/icons/icon_kasm.png
-ADD /src/base/common/resources/images/egress_info.svg /usr/share/extra/icons/egress_info.svg
-ADD /src/base/common/resources/images/egress_error.svg /usr/share/extra/icons/egress_error.svg
-ADD /src/base/common/resources/images/egress_offline.svg /usr/share/extra/icons/egress_offline.svg
+ADD ./base/src/common/resources/images/bg_kasm.png  /usr/share/backgrounds/bg_kasm.png
+ADD ./base/src/common/resources/images/$BG_IMG  /usr/share/backgrounds/bg_default.png
+ADD ./base/src/common/resources/images/icon_ubuntu.png /usr/share/extra/icons/icon_ubuntu.png
+ADD ./base/src/common/resources/images/icon_ubuntu.png /usr/share/extra/icons/icon_default.png
+ADD ./base/src/common/resources/images/icon_kasm.png /usr/share/extra/icons/icon_kasm.png
+ADD ./base/src/common/resources/images/egress_info.svg /usr/share/extra/icons/egress_info.svg
+ADD ./base/src/common/resources/images/egress_error.svg /usr/share/extra/icons/egress_error.svg
+ADD ./base/src/common/resources/images/egress_offline.svg /usr/share/extra/icons/egress_offline.svg
 
 ### Install kasm_vnc dependencies and binaries
-COPY ./src/base/ubuntu/install/kasm_vnc $INST_SCRIPTS/kasm_vnc/
+COPY ./base/src/ubuntu/install/kasm_vnc $INST_SCRIPTS/kasm_vnc/
 RUN bash $INST_SCRIPTS/kasm_vnc/install_kasm_vnc.sh && rm -rf $INST_SCRIPTS/kasm_vnc/
-COPY ./src/base/common/install/kasm_vnc/kasmvnc.yaml /etc/kasmvnc/
+COPY ./base/src/common/install/kasm_vnc/kasmvnc.yaml /etc/kasmvnc/
 
 ### Install custom cursors
-COPY ./src/base/ubuntu/install/cursors $INST_SCRIPTS/cursors/
+COPY ./base/src/ubuntu/install/cursors $INST_SCRIPTS/cursors/
 RUN bash $INST_SCRIPTS/cursors/install_cursors.sh && rm -rf $INST_SCRIPTS/cursors/
 
 ### configure startup
-COPY ./src/base/common/scripts/kasm_hook_scripts $STARTUPDIR
-ADD ./src/base/common/startup_scripts $STARTUPDIR
+COPY ./base/src/common/scripts/kasm_hook_scripts $STARTUPDIR
+ADD ./base/src/common/startup_scripts $STARTUPDIR
 RUN bash $STARTUPDIR/set_user_permission.sh $STARTUPDIR $HOME && \
     echo 'source $STARTUPDIR/generate_container_user' >> $HOME/.bashrc
 
 ### extra configurations needed per distro variant
-COPY ./src/base/ubuntu/install/extra $INST_SCRIPTS/extra/
+COPY ./base/src/ubuntu/install/extra $INST_SCRIPTS/extra/
 RUN bash $INST_SCRIPTS/extra/$EXTRA_SH  && rm -rf $INST_SCRIPTS/extra/
 
 ### VirtualGL
-COPY ./src/base/ubuntu/install/virtualgl $INST_SCRIPTS/virtualgl/
+COPY ./base/src/ubuntu/install/virtualgl $INST_SCRIPTS/virtualgl/
 RUN bash $INST_SCRIPTS/virtualgl/install_virtualgl.sh && rm -rf $INST_SCRIPTS/virtualgl/
 
 ### Sysbox support
-COPY ./src/base/ubuntu/install/sysbox $INST_SCRIPTS/sysbox/
+COPY ./base/src/ubuntu/install/sysbox $INST_SCRIPTS/sysbox/
 RUN bash $INST_SCRIPTS/sysbox/install_systemd.sh && rm -rf $INST_SCRIPTS/sysbox/
 
 ### Create user and home directory for base images that don't already define it
@@ -114,7 +114,7 @@ RUN touch $STARTUPDIR/wm.log \
     && chown 1000:1000 /run/pcscd
 
 ### Cleanup job
-COPY ./src/base/ubuntu/install/cleanup $INST_SCRIPTS/cleanup/
+COPY ./base/src/ubuntu/install/cleanup $INST_SCRIPTS/cleanup/
 RUN bash $INST_SCRIPTS/cleanup/cleanup.sh && rm -rf $INST_SCRIPTS/cleanup/
 
 #### Core Runtime Stage ####
@@ -180,7 +180,7 @@ WORKDIR $HOME
 
 
 # Install Google Chrome
-COPY ./src/chrome/install $INST_SCRIPTS/chrome/
+COPY ./chrome/src/install $INST_SCRIPTS/chrome/
 RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 
 # Update the desktop environment to be optimized for a single application
@@ -189,19 +189,19 @@ RUN cp /usr/share/backgrounds/bg_kasm.png /usr/share/backgrounds/bg_default.png
 RUN apt-get remove -y xfce4-panel
 
 # Security modifications, remove terminal
-COPY ./src/chrome/misc/single_app_security.sh $INST_SCRIPTS/misc/
+COPY ./chrome/src/misc/single_app_security.sh $INST_SCRIPTS/misc/
 RUN  bash $INST_SCRIPTS/misc/single_app_security.sh -t && rm -rf $INST_SCRIPTS/misc/
 
 # Setup the custom startup script that will be invoked when the container starts
 ENV LAUNCH_URL  chrome://newtab
 
-COPY ./src/chrome/install/custom_startup.sh $STARTUPDIR/custom_startup.sh
+COPY ./chrome/src/install/custom_startup.sh $STARTUPDIR/custom_startup.sh
 RUN chmod +x $STARTUPDIR/custom_startup.sh
 
 ENV KASM_RESTRICTED_FILE_CHOOSER=1
-COPY ./src/chrome/gtk/ $INST_SCRIPTS/gtk/
+COPY ./chrome/src/gtk/ $INST_SCRIPTS/gtk/
 RUN bash $INST_SCRIPTS/gtk/install_restricted_file_chooser.sh
-COPY ./src/chrome/close_browser_breakout_via_file_manager/ $INST_SCRIPTS/close_browser_breakout_via_file_manager/
+COPY ./chrome/src/close_browser_breakout_via_file_manager/ $INST_SCRIPTS/close_browser_breakout_via_file_manager/
 RUN bash $INST_SCRIPTS/close_browser_breakout_via_file_manager/replace_thunar_with_empty_script.sh
 
 
