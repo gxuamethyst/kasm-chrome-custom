@@ -10,6 +10,8 @@ ARG LANG='en_US.UTF-8'
 ARG LANGUAGE='en_US:en'
 ARG LC_ALL='en_US.UTF-8'
 ARG TZ='Etc/UTC'
+ARG USE_APT_MIRROR='false'
+
 ENV DEBIAN_FRONTEND=noninteractive \
     DISTRO=$DISTRO \
     HOME=/home/kasm-default-profile \
@@ -24,6 +26,13 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ### Home setup
 WORKDIR $HOME
 RUN mkdir -p $HOME/Desktop
+
+### Setup apt mirror(if specified)
+RUN if [ "$USE_APT_MIRROR" = "true" ]; then \
+        echo "using apt mirror ..." && \
+        sed -i "s@http://.*archive.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list && \
+        sed -i "s@http://.*security.ubuntu.com@http://mirrors.tuna.tsinghua.edu.cn@g" /etc/apt/sources.list
+    fi
 
 ### Setup package rules
 COPY ./base/src/ubuntu/install/package_rules $INST_SCRIPTS/package_rules/
