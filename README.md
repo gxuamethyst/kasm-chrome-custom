@@ -9,7 +9,7 @@ this image run at http mode, please reserve proxy by caddy/nginx with https.
 ``` shell
 sudo docker build -t ghcr.io/gxuamethyst/kasm-chrome-custom:dev .
 
-sudo docker run --rm  -d --shm-size=512m -p 6901:6901 -e VNC_PW=vncpassword gxuamethyst/kasm-chrome-custom:dev
+sudo docker run --rm  -d --shm-size=512m -p 6901:6901 -e VNC_PW=vncpassword ghcr.io/gxuamethyst/kasm-chrome-custom:dev
 ```
 
 ## reference
